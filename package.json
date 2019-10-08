@@ -1,0 +1,19 @@
+{
+  "name": "blocipedia",
+  "version": "1.0.0",
+  "description": "A Wikipedia-like application for users to learn from and contribute to an encyclopedia-like resource ",
+  "main": "index.js",
+  "scripts": {
+    "test": "export NODE_ENV=test&& jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kpwwalsh/blocipedia-node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kpwwalsh/blocipedia-node/issues"
+  },
+  "homepage": "https://github.com/kpwwalsh/blocipedia-node#readme"
+}
