@@ -18,22 +18,17 @@ module.exports = {
         where: { email }
       })
       .then((user) => {
-
-// #4
         if (!user || !authHelper.comparePass(password, user.password)) {
           return done(null, false, { message: "Invalid email or password" });
         }
-// #5
         return done(null, user);
       })
     }));
 
-// #6
     passport.serializeUser((user, callback) => {
       callback(null, user.id);
     });
 
-// #7
     passport.deserializeUser((id, callback) => {
       User.findById(id)
       .then((user) => {
@@ -42,7 +37,6 @@ module.exports = {
       .catch((err =>{
         callback(err, user);
       }))
-
     });
   }
 }

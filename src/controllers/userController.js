@@ -27,7 +27,7 @@ module.exports = {
     });
   },
   signInForm(req, res, next) {
-    res.render('users/sign_in');
+    res.render('users/sign_in', { title: 'lol' });
   },
   signIn(req, res, next) {
     passport.authenticate('local')(req, res, function() {
