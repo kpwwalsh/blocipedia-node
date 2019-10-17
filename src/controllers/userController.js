@@ -5,7 +5,9 @@ const emailConfirmation = require('../routes/api/email');
 module.exports = {
   signUp(req, res, next) {
     res.render('users/sign_up');
+    console.log(signUp(fdsf));
   },
+ 
   create(req, res, next) {
     let newUser = {
       username: req.body.username,
