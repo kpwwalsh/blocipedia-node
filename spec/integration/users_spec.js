@@ -5,11 +5,11 @@ const User = require("../../src/db/models").User;
 const sequelize = require("../../src/db/models/index").sequelize;
 
 describe("routes : users", () => {
-  beforeEach((done) => {
-    sequelize.sync({force: true})
-    .then(() => {
-      done();
-    })
+    beforeEach((done) => {
+        sequelize.sync({force: true})
+        .then(() => {
+          done();
+        })
     .catch((err) => {
       console.log(err);
       done();
@@ -17,6 +17,7 @@ describe("routes : users", () => {
   });
 
   describe("GET /users/sign_up", () => {
+   
     it("should render a view with a sign up form", (done) => {
       request.get(`${base}sign_up`, (err, res, body) => {
         expect(err).toBeNull();
@@ -27,6 +28,7 @@ describe("routes : users", () => {
   });
 
   describe('POST /users', () => {
+  
     it('should create a new user with valid values and redirect', done => {
       const options = {
         url: base,
@@ -38,6 +40,7 @@ describe("routes : users", () => {
         }
       };
       request.post(options, (err, res, body) => {
+        console.log(err, body);
         User.findOne({ where: { email: 'user@example.com' } })
           .then(user => {
             expect(user).not.toBeNull();
@@ -59,7 +62,8 @@ describe("routes : users", () => {
           url: base,
           form: {
             email: 'no',
-            password: '123456'
+            password: '123456789',
+            passwordConfirmation: '123456789'
           }
         },
         (err, res, body) => {
@@ -76,7 +80,9 @@ describe("routes : users", () => {
       );
     });
   });
+
     describe('GET /users/sign_in', () => {
+
       it('should render a view with a sign in form', done => {
        request.get(`${base}sign_in`, (err, res, body) => {
         expect(err).toBeNull();

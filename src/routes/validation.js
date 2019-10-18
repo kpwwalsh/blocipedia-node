@@ -15,6 +15,7 @@ module.exports = {
   
   //#3
       const errors = req.validationErrors();
+      console.log('errors:', errors);
   
       if (errors) {
   

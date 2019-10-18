@@ -1,11 +1,10 @@
-const userQueries = require('../db/queries.users.js');
+const userQueries = require('../db/queries.users');
 const passport = require('passport');
 const emailConfirmation = require('../routes/api/email');
 
 module.exports = {
   signUp(req, res, next) {
     res.render('users/sign_up');
-    console.log(signUp(fdsf));
   },
  
   create(req, res, next) {
@@ -16,15 +15,17 @@ module.exports = {
       passwordConfirmation: req.body.passwordConfirmation
     };
     userQueries.createUser(newUser, (err, user) => {
-      if (err) {
-        req.flash('error', err);
-        res.redirect('/users/sign_up');
-      } else {
-        passport.authenticate('local')(req, res, () => {
-          req.flash('notice', "You've successfully signed up!");
-          emailConfirmation.sendEmail(newUser.email);
-          res.redirect('/');
-        });
+        if (err) {
+            console.log("error: " + err);
+            req.flash('error', err);
+            res.redirect('/users/sign_up');
+          } else {
+            console.log("Authenticating");
+            passport.authenticate('local')(req, res, () => {
+              req.flash('notice', "You've successfully signed up!");
+              emailConfirmation.sendEmail(newUser.email);
+              res.redirect('/');
+            });
       }
     });
   },
