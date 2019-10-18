@@ -25,7 +25,7 @@ module.exports = {
               req.flash('notice', "You've successfully signed up!");
               emailConfirmation.sendEmail(newUser.email);
               res.redirect('/');
-            });
+            })();
       }
     });
   },
