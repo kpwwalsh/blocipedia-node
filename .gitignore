@@ -1,2 +1,3 @@
 /node_modules
-.envsendgrid.envsendgrid.env
+.env
+sendgrid.env

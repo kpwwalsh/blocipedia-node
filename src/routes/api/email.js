@@ -3,7 +3,7 @@
 
 
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 module.exports={ 
     sendEmail(newUserEmail){ 
