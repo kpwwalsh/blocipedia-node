@@ -7,7 +7,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
      <% if(messages.error) { %>
-        Validation errors:
+        Validation errors:"duplicate email"
         <ul>
           <% messages.error.forEach((err) => { %>
             <li><%= `${err.param} ${err.msg}` %></li>
