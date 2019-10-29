@@ -2,11 +2,11 @@ const wikiQueries = require('../db/queries.wikis.js');
 module.exports = {
     index(req, res, next){
         wikiQueries.getAllWikis((err, wikis)=>{
-            console.log(wikiQueries.getAllWikis(err,wiki));
+        //   console.log(wikiQueries.getAllWikis(err,wiki));
             if(err){
                 res.redirect(500, "static/index");
             }else{
-                res.redirect("wikis/index", {wikis});
+                res.render("wikis/index", {wikis});
             }
         });
       },
@@ -18,7 +18,7 @@ module.exports = {
      let newWiki = {
        title: req.body.title,
        body: req.body.body,
-       userId:req.user.id
+       private:req.body.private
      };
      wikiQueries.addWiki(newWiki, (err, wiki) => {
        if(err){
@@ -68,7 +68,7 @@ module.exports = {
                if(err || wiki == null){
                  res.redirect(404, `/wikis/${req.params.id}/edit`);
                } else {
-                 res.redirect(`/wikis/${wiki.id}`);
+                 res.redirect(`/wikis/${req.wiki.id}`);
                }
              });
            }
