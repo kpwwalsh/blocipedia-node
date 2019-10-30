@@ -18,7 +18,7 @@ module.exports = {
       },
       private: {
         type: Sequelize.BOOLEAN,
-        allowNull:false
+        defaultValue:false
       },
       createdAt: {
         allowNull: false,
