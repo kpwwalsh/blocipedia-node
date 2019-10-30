@@ -61,7 +61,6 @@ module.exports = {
         });
       },
       update(req, res, next){
-
         //#1
         wikiQueries.updateWiki(req.params.id, req.body, (err, wiki) => {
         
