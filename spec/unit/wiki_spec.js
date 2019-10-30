@@ -20,7 +20,7 @@ describe("Wiki", () => {
         Wiki.create({
             title: "Indochinese tiger",
             body: "Only a few of them left",
-            userId: this.user.id
+            userId:user.id
           })
           .then((wiki) => {
             this.wiki= wiki;
@@ -46,7 +46,7 @@ describe("Wiki", () => {
       Wiki.create({                // create a comment
         title: "Indochinese tiger",
         body: "Only a few of them left",
-        userId: this.user.id
+        userId:this.user.id
       })
       .then((wiki) => {            // confirm it was created with the values passed
         expect(wiki.title).toBe("Indochinese tiger");
@@ -62,9 +62,10 @@ describe("Wiki", () => {
 
 
 // #5: We test that comments with invalid attributes are not created
-    it("should not create a wiki with missing title or description", (done) => {
+    it("should not create a wiki with missing title or body", (done) => {
       Wiki.create({
-        title: "Do Androids Dream of Electric Sheep?"
+        title: "Do Androids Dream of Electric Sheep?",
+        body:""
       })
       .then((wiki) => {
 

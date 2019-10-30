@@ -18,9 +18,10 @@ module.exports = {
      let newWiki = {
        title: req.body.title,
        body: req.body.body,
-       private:req.body.private
+       userId:req.user.id
      };
      wikiQueries.addWiki(newWiki, (err, wiki) => {
+        console.log('add wiki err',err)
        if(err){
          res.redirect(500, "/wikis/new");
        } else {
