@@ -68,7 +68,7 @@ module.exports = {
                if(err || wiki == null){
                  res.redirect(404, `/wikis/${req.params.id}/edit`);
                } else {
-                 res.redirect(`/wikis/${req.wiki.id}`);
+                 res.redirect(`/wikis/${wiki.id}`);
                }
              });
            }
