@@ -2,6 +2,7 @@ const userQueries = require('../db/queries.users');
 const passport = require('passport');
 const emailConfirmation = require('../routes/api/email');
 
+console.log(signIn(req, res));
 module.exports = {
   signUp(req, res, next) {
     res.render('users/sign_up');
@@ -31,6 +32,7 @@ module.exports = {
   signInForm(req, res, next) {
     res.render('users/sign_in', { title: 'lol' });
   },
+ 
   signIn(req, res, next) {
     passport.authenticate('local')(req, res, function() {
       if (!req.user) {
@@ -40,8 +42,10 @@ module.exports = {
         req.flash('notice', "You've successfully signed in!");
         res.redirect('/');
       }
-    });
+    });    
+    console.log(signIn());
   },
+  
   signOut(req, res, next) {
     req.logout();
     req.flash('notice', "You've successfully signed out!");
