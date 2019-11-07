@@ -31,7 +31,7 @@ module.exports = {
        userId:req.user.id
      };
      wikiQueries.addWiki(newWiki, (err, wiki) => {
-        console.log('add wiki err',err)
+      //  console.log('add wiki err',err)
        if(err){
          res.redirect(500, "/wikis/new");
        } else {
@@ -53,7 +53,7 @@ module.exports = {
          });
        },
        destroy(req, res, next){
-        wikiQueries.deleteWiki(req, (err, wiki) => {
+        wikiQueries.deleteWiki(req.params.id, (err, wiki) => {
           if(err){
             res.redirect(500, `/wikis/${req.params.id}`)
           } else {
@@ -63,10 +63,11 @@ module.exports = {
       },
       edit(req, res, next){
         wikiQueries.getWiki(req.params.id, (err, wiki) => {
+            console.log('edit err', err)
           if(err || wiki == null){
             res.redirect(404, "/");
           } else {
-            const authorized = new Authorizer(req.user, topic).edit();
+            const authorized = new Authorizer(req.user).edit();
          if(authorized){
            res.render("wikis/edit", {wiki});
          } else {
@@ -78,10 +79,8 @@ module.exports = {
           },
     
       update(req, res, next){
-        //#1
         wikiQueries.updateWiki(req, req.body, (err, wiki) => {
-        
-        //#2
+            console.log('update err', err);
                if(err || wiki == null){
                  res.redirect(401, `/wikis/${req.params.id}/edit`);
                } else {
