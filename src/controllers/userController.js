@@ -53,7 +53,7 @@ module.exports = {
     res.redirect('/');
   },
   show(req, res, next){
-      console.log(req, res);
+      console.log(req, res)
       res.render("users/show");
   },
   downgradeForm(req, res, next){
