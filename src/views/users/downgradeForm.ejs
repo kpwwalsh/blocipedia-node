@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../static/partials/head.ejs %>
+</head>
+
+<body>
+
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+
+        <% include ../static/partials/messages.ejs %>
+
+        <h1>No more private wikis for me</h1>
+
+        <form action="/users/<%= currentUser.id %>/downgrade" method="POST" >
+           <button type="Submit" class= 'btn btn-warning'>Down I go</button>
+        </form>
+
+    </main>
+
+    <% include ../static/partials/baseScripts.ejs %>
+
+</body>
+
+</html> 

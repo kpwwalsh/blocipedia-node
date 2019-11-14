@@ -17,5 +17,30 @@ createUser(newUser, callback) {
    .catch(err => {
        callback(err);
     });
-  }
- };
+  },
+getUser(id, callback) {
+    return User.findId(id)
+      .then ((user)=> {
+          callback(user);
+})
+      .catch((err) => {
+          callback(err);
+      })
+},
+toggleUserRole(user){
+    User.findUser({
+        where:{email:user.email}
+    })
+    .then((user)=>{
+    if(user.role=="basic"){
+        user.update({
+            role:"premium"
+        });
+    } else if(user.role=="premium"){
+        user.update({
+            role:"basic"
+        });
+     }
+  })
+ }
+} 
