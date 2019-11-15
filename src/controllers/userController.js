@@ -1,7 +1,8 @@
 const userQueries = require('../db/queries.users');
 const passport = require('passport');
 const emailConfirmation = require('../routes/api/email');
-const stripe = require("stripe")(process.env.STRIPE_API_KEY);
+const stripe = require("stripe")('sk_test_gkyXttyy0xSxGtSVH4Q6qVIZ00ZM2fxawt');
+const User = require('./models').User;
 
 module.exports = {
   signUp(req, res, next) {
@@ -53,7 +54,7 @@ module.exports = {
     res.redirect('/');
   },
   show(req, res, next){
-      console.log(req, res)
+    //console.log(req, res)
       res.render("users/show");
   },
   downgradeForm(req, res, next){
@@ -67,8 +68,8 @@ module.exports = {
          email:req.body.stripeEmail,
          source: req.body.stripeToken
      })
-     .then((customer)=>{
-         stripe.charges.create({
+  .then((customer)=>{
+     return stripe.charges.create({
             amount: 1500,
             currency: 'usd',
             customer: customer.id,
@@ -77,12 +78,12 @@ module.exports = {
      })
      .then((charge)=>{
        if(charge){
-          userQueries.upgradeUser(req.user.id);
-          res.render("users/upgraded");
+          userQueries.toggleUserRole(user);
+          res.flash("Premius status granted baby!");
           res.redirect('/');
        }else{
            req.flash("notice","upgrade unsuccessful sucker");
-           res.redirect('/users/show')
+           res.redirect('/users/upgrade')
        }
      })
      .catch(err => {
@@ -90,8 +91,8 @@ module.exports = {
       })
   },
   downgrade(req, res, next) {
-    userQueries.downgradeUser(req.user.id);
-    res.render("users/downgraded");
+    userQueries.toggleUserRole(user);
+    res.render("users/downgrade");
     req.flash("notice", "You've downgraded your life!");
     res.redirect("/");
   }
