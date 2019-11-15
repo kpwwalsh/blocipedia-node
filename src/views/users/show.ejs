@@ -8,17 +8,14 @@
 
     <main class="container">
      <% include ../static/partials/messages.ejs %>
-      <h1><%= wiki.title %></h1>
       <%if(currentUser.isBasic()){%>
          <p> your basic account is good but being basic isn't, upgrade now!</p>
-         <a href='/users/<%= currentUser.id%>/upgradeForm'class='btn btn-primary'>Premium Status</a>
-      }
+         <a href='/users/upgrade'class='btn btn-primary'>Premium Status</a>
+      <%}%>
       <%if(currentUser.isPremium()){%>
         <p> I don't want to make cool private wikis henceforth, downgrade me!</p>
-        <a href='/users/<%= currentUser.id%>/downgradeForm'class='btn btn-primary'>Basic Status</a>
-     }
-      <p><%= wiki.body %></p>
-      <%}%>
+        <a href='/users/downgrade'class='btn btn-primary'>Basic Status</a>
+     <%}%>
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>

@@ -1,7 +1,7 @@
 const userQueries = require('../db/queries.users');
 const passport = require('passport');
 const emailConfirmation = require('../routes/api/email');
-const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
+const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 
 module.exports = {
   signUp(req, res, next) {
@@ -57,10 +57,10 @@ module.exports = {
       res.render("users/show");
   },
   downgradeForm(req, res, next){
-    res.render('users/downgrade');
+    res.render('users/downgradeForm');
 },
   upgradeForm(req, res, next){
-      res.render('users/upgrade');
+      res.render('users/upgradeForm');
   },
   upgrade(req, res, next){
      stripe.customers.create({
