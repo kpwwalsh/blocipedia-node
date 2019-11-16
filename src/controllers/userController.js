@@ -79,7 +79,7 @@ module.exports = {
      .then((charge)=>{
        if(charge){
           userQueries.upgradeUser(req.params.id);
-          res.flash("Premius status granted baby!");
+          req.flash("Premius status granted baby!");
           res.redirect('/');
        }else{
            req.flash("notice","upgrade unsuccessful sucker");
@@ -91,9 +91,9 @@ module.exports = {
       })
   },
   downgrade(req, res, next) {
-    userQueries.downgradeUser(req.params.id);
-    res.render("users/downgrade");
-    req.flash("notice", "You've downgraded your life!");
-    res.redirect("/");
+    userQueries.downgradeUser(req.params.id).then(() => {
+      req.flash("notice", "You've downgraded your life!");
+      res.redirect("/");
+    });
   }
-};
+}
