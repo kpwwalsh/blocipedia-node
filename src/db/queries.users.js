@@ -28,15 +28,15 @@ getUser(id, callback) {
       })
 },
 upgradeUser(id) {
-    User.findById(id).then(user => {
+   return User.findById(id).then(user => {
     return  user.update({
         role: "premium"
       });
     });
   },
 downgradeUser(id) {
-    User.findById(id).then(user => {
-  return  user.downgrade({
+  return  User.findById(id).then(user => {
+  return  user.update({
         role: "basic"
       });
     });
