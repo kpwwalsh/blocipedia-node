@@ -78,7 +78,7 @@ module.exports = {
      })
      .then((charge)=>{
        if(charge){
-          userQueries.toggleUserRole(user);
+          userQueries.upgradeUser(req.params.id);
           res.flash("Premius status granted baby!");
           res.redirect('/');
        }else{
@@ -91,7 +91,7 @@ module.exports = {
       })
   },
   downgrade(req, res, next) {
-    userQueries.toggleUserRole(user);
+    userQueries.downgradeUser(req.params.id);
     res.render("users/downgrade");
     req.flash("notice", "You've downgraded your life!");
     res.redirect("/");

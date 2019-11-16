@@ -27,24 +27,24 @@ getUser(id, callback) {
           callback(err);
       })
 },
-upgradeUser(user) {
-    User.findUser({
+upgradeUser(id) {
+    User.findById(id)({
       where: {
         id: user.id
       }
     }).then(user => {
-      user.update({
+    return  user.update({
         role: "premium"
       });
     });
   },
-downgradeUser(user) {
-    User.findUser({
+downgradeUser(id) {
+    User.findById(id)({
       where: {
         id: user.id
       }
     }).then(user => {
-      user.downgrade({
+  return  user.downgrade({
         role: "basic"
       });
     });
