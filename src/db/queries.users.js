@@ -27,20 +27,27 @@ getUser(id, callback) {
           callback(err);
       })
 },
-toggleUserRole(user){
+upgradeUser(user) {
     User.findUser({
-        where:{email:user.email}
-    })
-    .then((user)=>{
-    if(user.role=="basic"){
-        user.update({
-            role:"premium"
-        });
-    } else if(user.role=="premium"){
-        user.update({
-            role:"basic"
-        });
-     }
-  })
+      where: {
+        id: user.id
+      }
+    }).then(user => {
+      user.update({
+        role: "premium"
+      });
+    });
+  },
+downgradeUser(user) {
+    User.findUser({
+      where: {
+        id: user.id
+      }
+    }).then(user => {
+      user.downgrade({
+        role: "basic"
+      });
+    });
+  }
  }
-} 
+
