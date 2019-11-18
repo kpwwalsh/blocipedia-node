@@ -76,7 +76,50 @@ module.exports = {
             callback(err);
         })
     },
+    toPrivate(id, callback){
+        return Wiki.findById(id)
+        .then((wiki) => {
+            if(!wiki){
+                return callback("No wiki here");
+            }
+            wiki.update({
+                private: true
+            })
+           return  callback(null, wiki);
+        })
+        .catch((err) => {
+          callback(err);
+        })
+      },
+      toPublic(id, callback){
+        return Wiki.findById(id)
+        .then((wiki) => {
+            if(!wiki){
+                return callback("No wiki here");
+            }
+            wiki.update({
+                private: false
+            })
+           return  callback(null, wiki);
+        })
+        .catch((err) => {
+          callback(err);
+        })
+      },
+      downgrade(id){
+        return Wiki.findbyId(id)
+        .then((wikis) => {
+          wikis.forEach(wiki => {
+            wiki.update({
+              private: false
+            });
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
+}
 
 
 

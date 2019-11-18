@@ -13,7 +13,7 @@
 
         <% include ../static/partials/messages.ejs %>
 
-        <h1>No more private wikis for me</h1>
+        <h1>My private wikis are going public</h1>
 
         <form action="/users/<%= currentUser.id %>/downgrade" method="POST" >
            <button type="Submit" class= 'btn btn-warning'>Down I go</button>
