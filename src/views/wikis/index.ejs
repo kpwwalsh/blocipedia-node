@@ -11,7 +11,6 @@
       <h1>Wikis</h1>
         
         <a href="/wikis/new" class="btn btn-success">New Wiki</a>
-        <% } %>
 
       <ul class="list-group">
         <% wikis.forEach((wiki) => { %>
@@ -19,17 +18,17 @@
           <%if(currentUser){%>
             <% if(currentUser.isPremium()||currentUser.isAdmin()){%>
                 <li class="list-group">
-                    <a href="/wikis/<% wiki.id %>"> <%=wiki.title%> </a>
+                    <a href="/wikis/<% wiki.id %>"> <%=wiki.title %> </a>
                 </li>
            <% }%>
-        <% }) %>
+        <% } %>
         <%}else{%>
             <li class="list-group">
                 <a href= "/wikis/<%wiki.id%>">
-                    <&%=wiki.title%></a>
+                    <%=wiki.title%></a>
             </li>
             <% }%>
-            <% }%>
+            <% })%>
       </ul>
     </main>
   </body>

@@ -21,7 +21,7 @@
           <label for="body">body</label>
           <textarea rows="4" class="form-control" name="body" placeholder="Enter Body"></textarea>
         </div>
-        <% if(currentUser.isPremium()||currentUser().isAdmin(){ %>
+        <% if(currentUser.isPremium()||currentUser.isAdmin()){ %>
             <div class="form-group">
                     <label for="private">Make wiki private</label>
                     <input type ="checkbox" class="form-control" name="private">
