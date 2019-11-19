@@ -12,5 +12,6 @@ router.post("/wikis/:id/update", wikiController.update);
 router.post('/wikis/createPrivate', wikiController.createPrivate);
 router.post('/wikis/:id/setPublic', wikiController.setPublic);
 router.post('/wikis/:id/setPrivate', wikiController.setPrivate);
+router.post('/wikis/newPrivate', wikiController.newPrivate);
 
 module.exports = router;
