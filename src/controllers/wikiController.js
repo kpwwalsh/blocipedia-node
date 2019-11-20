@@ -104,7 +104,6 @@ module.exports = {
       },
       edit(req, res, next){
         wikiQueries.getWiki(req.params.id, (err, wiki) => {
-            console.log('edit err', err)
           if(err || wiki == null){
             res.redirect(404, "/");
           } else {
@@ -120,8 +119,8 @@ module.exports = {
           },
     
       update(req, res, next){
+        console.log(req.body);
         wikiQueries.updateWiki(req, req.body, (err, wiki) => {
-            console.log('update err', err);
                if(err || wiki == null){
                  res.redirect(401, `/wikis/${req.params.id}/edit`);
                } else {
