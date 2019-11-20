@@ -23,7 +23,7 @@
         <% if(currentUser.isPremium()|| currentUser.isAdmin()){%>
              <div class="form-group">
                  <label for="private">Make Wiki private</label>
-                <input value="<% wiki.private %>"" type="checkbox" class="form-control" name="private" placeholder="<% wiki.private %>">
+                <input value="<% =wiki.private %>" type="checkbox" class="form-control" name="private" placeholder="<% =wiki.private %>">
                 </div>
        <% }%>
         <button type="submit" class="btn btn-primary">Update</button>
