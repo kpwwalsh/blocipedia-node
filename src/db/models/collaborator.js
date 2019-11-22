@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
           model: models.Wiki
         }],
         where: { userId: userId },
-        order: [["createdAt", "ASC"]]
+        order: [["createdAt", "DESC"]]
       }
     });
   };

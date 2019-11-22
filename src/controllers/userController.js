@@ -2,7 +2,7 @@ const userQueries = require('../db/queries.users');
 const passport = require('passport');
 const emailConfirmation = require('../routes/api/email');
 const stripe = require("stripe")('sk_test_gkyXttyy0xSxGtSVH4Q6qVIZ00ZM2fxawt');
- 
+const wikiQueries = require("../db/queries.wikis.js");
 
 module.exports = {
   signUp(req, res, next) {
@@ -91,6 +91,7 @@ module.exports = {
       })
   },
   downgrade(req, res, next) {
+    wikiQueries.downgrade(req.params.id);
     userQueries.downgradeUser(req.params.id).then(() => {
       req.flash("notice", "You've downgraded your life!");
       res.redirect("/");
