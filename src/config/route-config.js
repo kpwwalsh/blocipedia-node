@@ -7,9 +7,11 @@ module.exports = {
             mockAuth.fakeIt(app);
           }
         const wikiRoutes = require("../routes/wikis");
+        const collaboratorRoutes= require("../routes/collaborators")
 
         app.use(staticRoutes);
         app.use(userRoutes);
         app.use(wikiRoutes);
+        app.use(collaboratorRoutes);
     }
   };

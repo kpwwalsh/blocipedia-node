@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+      <% include ../static/partials/messages.ejs %>
+      <a href="/wikis/<%= wiki.id %>" class="btn btn-primary">Back</a>
+      <h1> "<%= wiki.title %>"</h1>
+      <p class="text-muted">User <%= wiki.userId %>, 
+      <br />Last updated <%= wiki.updatedAt %></p>
+
+        <h2>Add Collaborator</h2>
+      <% if(currentUser && (currentUser.id === wiki.userId || currentUser.role === Premium)) { %>
+        <form  action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
+            <div class="input-group">
+                <input type="text" class="form-control" name="collaborator" placeholder="Enter username">
+                <button type="submit" class="btn btn-secondary">Add</button>
+            </div>
+        </form>
+        <% } %>
+
+        <% if(wiki.collaborators) { %>
+        <ul class="list-group">
+            <% wiki.collaborators.forEach((collaborator) => {  %>
+            <li class="list-group-item">
+                <h4>
+                    <%= collaborator.User.username %>
+                </h4>
+                <% if(currentUser && (currentUser.id === wiki.userId || currentUser.role === Premium)) { %>
+                <form action="/wikis/<%= wiki.id %>/collaborators/delete" method="post">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <input type="hidden" value="<%= collaborator.User.id %>" class="form-control" name="collaborator">
+                </form>
+                <% } %>
+            </li>
+            <% }) %>
+        </ul>
+        <% } else { %>
+          <p>No Collaborators here friend</p>
+          <% } %>
+      <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit</a>
+        <% if((currentUser && currentUser.role == Basic) || (currentUser && currentUser.role == Premium)) { 
+            if(wiki.private == true) { %>
+              <p>Make public?</p>
+              <form
+        style="display:initial"
+        action="/wikis/<%= wiki.id %>/makePublic"
+        method="post"
+      >
+        <button type="submit" class="btn btn-info">Make Public</button>
+      </form>
+        <% } else if(wiki.private == false) { %>
+          <p>Make private?</p>
+              <form
+        style="display:initial"
+        action="/wikis/<%= wiki.id %>/makePrivate"
+        method="post"
+      >
+        <button type="submit" class="btn btn-info">Make Private</button>
+      </form>
+        <% } } %>
+      <p><%- wiki.body %></p>
+      <form
+        style="display:initial"
+        action="/wikis/<%= wiki.id %>/destroy"
+        method="post"
+      >
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </main>
+    <% include ../static/partials/baseScripts.ejs %>
+  </body>
+</html>
