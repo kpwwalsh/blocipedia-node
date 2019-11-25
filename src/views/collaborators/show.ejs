@@ -31,7 +31,7 @@
                     <%= collaborator.User.username %>
                 </h4>
                 <% if(currentUser && (currentUser.id === wiki.userId || currentUser.role === "premium")) { %>
-                <form action="/wikis/<%= wiki.id %>/collaborators/delete" method="post">
+                <form action="/wikis/<%= wiki.id %>/collaborators/remove" method="post">
                     <button type="submit" class="btn btn-danger">Delete</button>
                     <input type="hidden" value="<%= collaborator.User.id %>" class="form-control" name="collaborator">
                 </form>
@@ -48,7 +48,7 @@
               <p>Make public?</p>
               <form
         style="display:initial"
-        action="/wikis/<%= wiki.id %>/makePublic"
+        action="/wikis/<%= wiki.id %>/setPublic"
         method="post"
       >
         <button type="submit" class="btn btn-info">Make Public</button>
@@ -57,7 +57,7 @@
           <p>Make private?</p>
               <form
         style="display:initial"
-        action="/wikis/<%= wiki.id %>/makePrivate"
+        action="/wikis/<%= wiki.id %>/setPrivate"
         method="post"
       >
         <button type="submit" class="btn btn-info">Make Private</button>
