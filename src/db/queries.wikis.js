@@ -123,7 +123,7 @@ module.exports = {
         })
       },
       downgrade(id){
-        return Wiki.findbyId(id)
+        return Wiki.findById(id)
         .then((wikis) => {
           wikis.forEach(wiki => {
             wiki.update({
