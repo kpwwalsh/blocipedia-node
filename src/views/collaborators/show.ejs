@@ -14,8 +14,8 @@
       <br />Last updated <%= wiki.updatedAt %></p>
 
         <h2>Add Collaborator</h2>
-      <% if(currentUser && (currentUser.id === wiki.userId || currentUser.role === Premium)) { %>
-        <form  action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
+      <% if(currentUser && (currentUser.id === wiki.userId || currentUser.role === "premium")) { %>
+        <form  action="/wikis/<%= wiki.id %>/collaborators/show" method="post">
             <div class="input-group">
                 <input type="text" class="form-control" name="collaborator" placeholder="Enter username">
                 <button type="submit" class="btn btn-secondary">Add</button>
@@ -30,7 +30,7 @@
                 <h4>
                     <%= collaborator.User.username %>
                 </h4>
-                <% if(currentUser && (currentUser.id === wiki.userId || currentUser.role === Premium)) { %>
+                <% if(currentUser && (currentUser.id === wiki.userId || currentUser.role === "premium")) { %>
                 <form action="/wikis/<%= wiki.id %>/collaborators/delete" method="post">
                     <button type="submit" class="btn btn-danger">Delete</button>
                     <input type="hidden" value="<%= collaborator.User.id %>" class="form-control" name="collaborator">
@@ -43,7 +43,7 @@
           <p>No Collaborators here friend</p>
           <% } %>
       <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit</a>
-        <% if((currentUser && currentUser.role == Basic) || (currentUser && currentUser.role == Premium)) { 
+        <% if((currentUser && currentUser.role == "basic") || (currentUser && currentUser.role == "premium")) { 
             if(wiki.private == true) { %>
               <p>Make public?</p>
               <form
