@@ -14,7 +14,6 @@ module.exports = {
         })
       },
       getWiki(req, callback){
-          console.log(req);
         return Wiki.findById(req.params.id,{
             include:[
                 {model: Collaborator, as:'collaborators', include: [{model:User}]}
