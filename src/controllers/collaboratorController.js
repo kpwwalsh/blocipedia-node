@@ -17,6 +17,7 @@ module.exports = {
     add(req, res, next){
         collaboratorQueries.createCollaborator(req, (err, collaborator) => {
             if (err) {
+              console.log(err);
                 req.flash("notice", "err")
             }
             res.redirect(`/wikis/${req.params.wikiId}/collaborators`);

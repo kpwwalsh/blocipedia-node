@@ -40,7 +40,7 @@ module.exports = {
           })
         })
       },
-
+      
       deleteCollaborator(req, callback) {
         let id= req.params.id;
         const authorized = new Authorizer(req.user, wiki, userId).destroy();

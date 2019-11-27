@@ -95,9 +95,11 @@ module.exports = {
            }
          });
        },
+     
        destroy(req, res, next){
-        wikiQueries.deleteWiki(req.params.id, (err, wiki) => {
+        wikiQueries.deleteWiki(req, (err, wiki) => {
           if(err){
+              console.log(err);
             res.redirect(500, `/wikis/${req.params.id}`)
           } else {
             res.redirect(303, "/wikis")
@@ -121,9 +123,9 @@ module.exports = {
           },
     
       update(req, res, next){
-        console.log(req.body);
         wikiQueries.updateWiki(req, req.body, (err, wiki) => {
                if(err || wiki == null){
+                   console.log(err, wiki);
                  res.redirect(401, `/wikis/${req.params.id}/edit`);
                } else {
                  res.redirect(`/wikis/${req.params.id}`);

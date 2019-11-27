@@ -9,12 +9,10 @@
     <main class="container">
       <% include ../static/partials/messages.ejs %>
       <a href="/wikis/<%= wiki.id %>" class="btn btn-primary">Back</a>
-      <h1> "<%= wiki.title %>"</h1>
-      <p class="text-muted">User <%= wiki.userId %>, 
-      <br />Last updated <%= wiki.updatedAt %></p>
-
+      <h1> <%= wiki.title %>Wiki</h1>
+      <p class="text-muted">User <%= wiki.userId %></p>
         <h2>Add Collaborator</h2>
-      <% if(currentUser && (currentUser.id === wiki.userId || currentUser.role === "premium")) { %>
+      <% if(currentUser && (currentUser.id === wiki.userId || currentUser.role === "premium"|| curremtUser.role==="admin")) { %>
         <form  action="/wikis/<%= wiki.id %>/collaborators/add" method="post">
             <div class="input-group">
                 <input type="text" class="form-control" name="collaborator" placeholder="Enter username">
@@ -30,7 +28,7 @@
                 <h4>
                     <%= collaborator.User.username %>
                 </h4>
-                <% if(currentUser && (currentUser.id === wiki.userId || currentUser.role === "premium")) { %>
+                <% if(currentUser && (currentUser.id === wiki.userId ||currentUser.role === "premium"|| currentUser.role==="admin")) { %>
                 <form action="/wikis/<%= wiki.id %>/collaborators/remove" method="post">
                     <button type="submit" class="btn btn-danger">Delete</button>
                     <input type="hidden" value="<%= collaborator.User.id %>" class="form-control" name="collaborator">
