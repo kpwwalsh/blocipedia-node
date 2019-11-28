@@ -40,7 +40,7 @@ module.exports = {
           })
         })
       },
-      
+
       deleteCollaborator(req, callback) {
         let id= req.params.id;
         const authorized = new Authorizer(req.user, wiki, userId).destroy();
@@ -62,12 +62,27 @@ module.exports = {
         }
       },
       getCollaborators(id, callback){
-        Wiki.findOne(
-          {
-            where: { id: id }
-          },
-          { include: [{ model: Collaborator, as: "collaborators" }] }
-        )
+        return Wiki.findOne({
+            where: {
+              id: id
+            },
+            include: [
+              {
+                model: Collaborator,
+                as: "collaborators",
+                include: [
+                  {
+                    model: Wiki,
+                    as: "wiki"
+                  },
+                  {
+                    model: User,
+                    as: "user"
+                  }
+                ]
+              }
+            ]
+          })
         .then(wiki => {
           callback(null, wiki, wiki.collaborators);
         })

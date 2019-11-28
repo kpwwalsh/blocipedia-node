@@ -26,12 +26,12 @@
             <% wiki.collaborators.forEach((collaborator) => {  %>
             <li class="list-group-item">
                 <h4>
-                    <%= collaborator.User.username %>
+                    <%= collaborator.user.username %>
                 </h4>
                 <% if(currentUser && (currentUser.id === wiki.userId ||currentUser.role === "premium"|| currentUser.role==="admin")) { %>
                 <form action="/wikis/<%= wiki.id %>/collaborators/remove" method="post">
                     <button type="submit" class="btn btn-danger">Delete</button>
-                    <input type="hidden" value="<%= collaborator.User.id %>" class="form-control" name="collaborator">
+                    <input type="hidden" value="<%= collaborator.user.id %>" class="form-control" name="collaborator">
                 </form>
                 <% } %>
             </li>

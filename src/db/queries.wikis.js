@@ -16,7 +16,10 @@ module.exports = {
       getWiki(req, callback){
         return Wiki.findById(req.params.id,{
             include:[
-                {model: Collaborator, as:'collaborators', include: [{model:User}]}
+                {model: Collaborator, as:'collaborators', 
+                include: [{model:User,
+                           as:"user"
+                          }]}
             ]
         })
         .then((wiki) => {

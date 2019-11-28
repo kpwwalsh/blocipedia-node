@@ -14,7 +14,9 @@
           <% }) %>
         </ul>
         <% } else { %>
-            <p><%= messages.notice %></p>
-          <% } %>
+          <% messages.notice.forEach((message) => { %>
+            <li><%= message %></li>
+          <% }) %>         
+      <% } %>
       </div>
     <% } %>
