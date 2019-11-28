@@ -14,12 +14,13 @@
 
       <ul class="list-group">
         <% wikis.forEach((wiki) => { %>
-            if(wiki.private && currentUser && (currentUser.isPremium() 
-            || currentUser.isAdmin() || currentUser.userId = wiki.userId)){%>
+         <% if(wiki.private){%>
+          <%if(currentUser){%>
+            <% if(currentUser.userId==currentUser.wikiId|| currentUser.isPremium()||currentUser.isAdmin()){%>
                 <li class="list-group">
                     <a href="/wikis/<%=wiki.id %>"> <%=wiki.title %> </a>
                 </li>
-           <% })%>
+           <% }%>
         <% } %>
         <%}else{%>
             <li class="list-group">
