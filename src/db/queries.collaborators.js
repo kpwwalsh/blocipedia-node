@@ -61,6 +61,20 @@ module.exports = {
           callback(401);
         }
       },
+      getUserCollaborations(req, callback){
+        Collaborator.findAll({
+            where: {
+              userId: req.user.id,
+              wikiId: req.params.id,
+            }
+          })
+          .then(collaborators => {
+            callback(null, collaborators);
+          })
+          .catch(err => {
+            callback(err);
+          })
+        },
       getCollaborators(id, callback){
         return Wiki.findOne({
             where: {

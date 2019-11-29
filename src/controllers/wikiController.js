@@ -85,18 +85,23 @@ module.exports = {
         }
     })
 },
-   show(req, res, next){
-         wikiQueries.getWiki(req, (err, wiki) => {
-           if(err || wiki == null){
-             res.redirect(404, "/");
-           } else {
-            wiki.body = markdown.toHTML(wiki.body);
-             res.render("wikis/show", {wiki});
-           }
-         });
-       },
+show(req, res, next){
+    wikiQueries.getUserCollaborations(req, (err, collaborations) => {
+      wikiQueries.getWiki(req, (err, wiki) => {
+        if(err || wiki == null){
+          res.redirect(404, "/");
+        } else {
+        wiki.body = markdown.toHTML(wiki.body);
+          res.render("wikis/show", {   
+            wiki, 
+           isCollaborating: collaborations.length>[0]            
+          });
+       }
+    });
+  })
+},
      
-       destroy(req, res, next){
+  destroy(req, res, next){
         wikiQueries.deleteWiki(req, (err, wiki) => {
           if(err){
               console.log(err);
@@ -106,7 +111,7 @@ module.exports = {
           }
         });
       },
-      edit(req, res, next){
+    edit(req, res, next){
         wikiQueries.getWiki(req, (err, wiki) => {
           if(err || wiki == null){
             res.redirect(404, "/");

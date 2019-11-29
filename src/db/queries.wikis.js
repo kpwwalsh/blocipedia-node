@@ -19,7 +19,12 @@ module.exports = {
                 {model: Collaborator, as:'collaborators', 
                 include: [{model:User,
                            as:"user"
-                          }]}
+                          },
+                          {
+                             model:Wiki,
+                             as:"wiki"
+                          }
+                        ]}
             ]
         })
         .then((wiki) => {
@@ -92,6 +97,20 @@ module.exports = {
         })
         .catch((err) => {
             callback(err);
+        })
+    },
+    getUserCollaborations(id, callback){
+        return Wiki.findById(id)
+        .then((wikis) => {
+            wikis.forEach(wiki => {
+              wiki.update({
+                private: false
+              });
+            });
+          return  callback(null, wiki);
+        })
+        .catch((err) => {
+          callback(err);
         })
     },
     toPrivate(id, callback){
