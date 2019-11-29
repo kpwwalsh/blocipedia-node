@@ -1,6 +1,7 @@
 const wikiQueries = require('../db/queries.wikis.js');
 const Authorizer = require("../policies/wiki");
 const markdown = require( "markdown" ).markdown;
+const collaboratorQueries= require("../db/queries.collaborators")
 
 module.exports = {
     index(req, res, next){
@@ -86,7 +87,7 @@ module.exports = {
     })
 },
 show(req, res, next){
-    wikiQueries.getUserCollaborations(req, (err, collaborations) => {
+    collaboratorQueries.getUserCollaborations(req, (err, collaborations) => {
       wikiQueries.getWiki(req, (err, wiki) => {
         if(err || wiki == null){
           res.redirect(404, "/");

@@ -16,9 +16,6 @@
         <% if(currentUser.isCollaborating || currentUser.isPremium() || currentUser.isAdmin()) { %>
         <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit wiki</a>
         <% } %>
-        <% } else if(collaborator.userId==collaborator.wikiId){ %>
-            <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit wiki</a>
-            <% } %>
         <% } else { %>
         <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit wiki</a>
         <% } %>

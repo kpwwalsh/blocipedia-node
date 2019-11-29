@@ -99,20 +99,7 @@ module.exports = {
             callback(err);
         })
     },
-    getUserCollaborations(id, callback){
-        return Wiki.findById(id)
-        .then((wikis) => {
-            wikis.forEach(wiki => {
-              wiki.update({
-                private: false
-              });
-            });
-          return  callback(null, wiki);
-        })
-        .catch((err) => {
-          callback(err);
-        })
-    },
+
     toPrivate(id, callback){
         return Wiki.findById(id)
         .then((wiki) => {
