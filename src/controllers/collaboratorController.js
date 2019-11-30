@@ -7,6 +7,7 @@ module.exports = {
     show(req, res, next){
       collaboratorQueries.getCollaborators(req.params.wikiId, (err, wiki, collaborators) => {
         if(err || !req.params.wikiId){
+          console.log(err);
           res.redirect(404, '/');
         } else {
           res.render("collaborators/show", {wiki, collaborators});

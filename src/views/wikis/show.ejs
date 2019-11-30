@@ -8,12 +8,12 @@
     <main class="container">
      <% include ../static/partials/messages.ejs %>
       <h1><%= wiki.title %></h1>
-        <% if(currentUser &&(currentUser.isPremium() || currentUser.isAdmin()&& wiki.private==true)) { %>
+        <% if(currentUser.isCollaborating &&(currentUser.isPremium() || currentUser.isAdmin()&& wiki.private==true)) { %>
         <a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-warning">Collaborate!</a>
         <% }%>
       <% if(wiki.private) { %>
         <p>This wiki is private. Only Premium members may edit private wikis.</p>
-        <% if(currentUser.isCollaborating || currentUser.isPremium() || currentUser.isAdmin()) { %>
+        <% if(isCollaborating || currentUser.isPremium() || currentUser.isAdmin()) { %>
         <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit wiki</a>
         <% } %>
         <% } else { %>

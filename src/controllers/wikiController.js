@@ -90,12 +90,13 @@ show(req, res, next){
     collaboratorQueries.getUserCollaborations(req, (err, collaborations) => {
       wikiQueries.getWiki(req, (err, wiki) => {
         if(err || wiki == null){
+            console.log(err);
           res.redirect(404, "/");
         } else {
         wiki.body = markdown.toHTML(wiki.body);
           res.render("wikis/show", {   
             wiki, 
-           isCollaborating: collaborations.length>[0]            
+           isCollaborating: collaborations.length>0          
           });
        }
     });
@@ -115,6 +116,7 @@ show(req, res, next){
     edit(req, res, next){
         wikiQueries.getWiki(req, (err, wiki) => {
           if(err || wiki == null){
+              console.log(err);
             res.redirect(404, "/");
           } else {
             const authorized = new Authorizer(req.user).edit();

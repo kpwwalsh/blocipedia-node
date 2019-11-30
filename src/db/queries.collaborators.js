@@ -5,6 +5,7 @@ const Authorizer = require('../policies/application');
 
 module.exports = {
     createCollaborator(req, callback) {
+        console.log(req);
         User.findOne({
           where: {
             username: req.body.collaborator
@@ -12,6 +13,7 @@ module.exports = {
         })
         .then((user) => {
           if(!user) {
+              console.log(!user);
             return callback("User not found")
           }else if(user.id==req.user.id){
               return callback("you are a collab product owner already")
@@ -24,6 +26,7 @@ module.exports = {
             }
           })
           .then((collaborator) => {
+              console.log(collaborator);
             if(collaborator) {
               return callback("This user is already a collaborator")
             };
@@ -62,6 +65,7 @@ module.exports = {
         }
       },
       getUserCollaborations(req, callback){
+          console.log(req);
         Collaborator.findAll({
             where: {
               userId: req.user.id,
@@ -76,6 +80,7 @@ module.exports = {
           })
         },
       getCollaborators(id, callback){
+          console.log(id);
         return Wiki.findOne({
             where: {
               id: id
