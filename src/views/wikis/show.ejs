@@ -8,7 +8,7 @@
     <main class="container">
      <% include ../static/partials/messages.ejs %>
       <h1><%= wiki.title %></h1>
-        <% if(currentUser.isCollaborating &&(currentUser.isPremium() || currentUser.isAdmin()&& wiki.private==true)) { %>
+        <% if(currentUser &&(isCollaborating || currentUser.isPremium() || currentUser.isAdmin()&& wiki.private==true)) { %>
         <a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-warning">Collaborate!</a>
         <% }%>
       <% if(wiki.private) { %>

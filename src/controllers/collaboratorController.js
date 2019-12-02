@@ -1,6 +1,3 @@
-const wikiQueries = require('../db/queries.wikis.js');
-const User= require("../db/models").User;
-const Wiki= require("../db/models").Wiki;
 const collaboratorQueries= require("../db/queries.collaborators")
  
 module.exports = {
@@ -28,6 +25,7 @@ module.exports = {
         if(req.user) {
             collaboratorQueries.deleteCollaborator(req, (err, collaborator) => {
               if(err) {
+                console.log(err);
                 req.flash("error", err)
               }
               res.redirect(req.headers.referer);
