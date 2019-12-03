@@ -13,7 +13,6 @@ module.exports = {
         })
         .then((user) => {
           if(!user) {
-              console.log(!user);
             return callback("User not found")
           }else if(user.id==req.user.id){
               return callback("you are a collab product owner already")
@@ -26,7 +25,6 @@ module.exports = {
             }
           })
           .then((collaborator) => {
-              console.log(collaborator);
             if(collaborator) {
               return callback("This user is already a collaborator")
             };
@@ -46,10 +44,9 @@ module.exports = {
 
        deleteCollaborator(req, callback) {
         wikiQueries.getWiki(req, (err, wiki) => {
-            console.log(err);
-            User.find({ where: req.body.collaborator })
+            User.find({ where: { id: req.body.collaborator } })
             .then(user => {
-              const authorized = new Authorizer(req.user, wiki, userId).destroy();
+                const authorized = new Authorizer(req.user, wiki).destroy();
               if (authorized) {
                 Collaborator.destroy({
                   where: {
@@ -58,6 +55,7 @@ module.exports = {
                   }
                 })
                   .then(deletedRecordsCount => {
+                    console.log('deletedRecordsCount:', deletedRecordsCount)
                     callback(null, deletedRecordsCount);
                   })
                   .catch(err => {

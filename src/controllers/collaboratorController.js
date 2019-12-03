@@ -22,7 +22,8 @@ module.exports = {
         });
     },
     remove(req, res, next){
-        if(req.user) {
+        if(req.user){
+          console.log(req.user)
             collaboratorQueries.deleteCollaborator(req, (err, collaborator) => {
               if(err) {
                 console.log(err);

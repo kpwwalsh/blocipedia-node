@@ -14,6 +14,10 @@ module.exports = {
         })
       },
       getWiki(req, callback){
+        let id = req.params.id;
+        if (id == null) {
+          id = req.params.wikiId;
+        }
         return Wiki.findById(req.params.id,{
             include:[
                 {model: Collaborator, as:'collaborators', 
