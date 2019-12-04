@@ -1,4 +1,5 @@
-const collaboratorQueries= require("../db/queries.collaborators")
+const collaboratorQueries= require("../db/queries.collaborators");
+
  
 module.exports = {
     show(req, res, next){
@@ -22,18 +23,21 @@ module.exports = {
         });
     },
     remove(req, res, next){
-        if(req.user){
-          console.log(req.user)
-            collaboratorQueries.deleteCollaborator(req, (err, collaborator) => {
-              if(err) {
-                console.log(err);
-                req.flash("error", err)
-              }
-              res.redirect(req.headers.referer);
-            });
-          } else {
-            req.flash("notice", "You must be signed in to do that");
+      if(req.user){
+        // console.log(req.user)
+          collaboratorQueries.deleteCollaborator(req, (err, collaborator) => {
+
+            if(err === 401) {
+              req.flash('notice', 'You are not authorized to delete a collaborator')
+            } else if(err) {
+              req.flash("notice", err.message ? err.message : err.toString())
+            }
+
             res.redirect(req.headers.referer);
-          }
-    }
-}; 
+          });
+        } else {
+          req.flash("notice", "You must be signed in to do that");
+          res.redirect(req.headers.referer);
+        }
+  }
+  };

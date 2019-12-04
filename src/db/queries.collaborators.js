@@ -1,8 +1,9 @@
 const Collaborator = require('./models').Collaborator;
 const Wiki = require('./models').Wiki;
 const User = require('./models').User;
-const Authorizer = require('../policies/application');
+const Authorizer = require('../policies/collaborators.js');
 const wikiQueries = require('../db/queries.wikis.js');
+
 
 module.exports = {
     createCollaborator(req, callback) {
@@ -55,7 +56,7 @@ module.exports = {
                   }
                 })
                   .then(deletedRecordsCount => {
-                    console.log('deletedRecordsCount:', deletedRecordsCount)
+                  //  console.log('deletedRecordsCount:', deletedRecordsCount);
                     callback(null, deletedRecordsCount);
                   })
                   .catch(err => {
@@ -73,7 +74,7 @@ module.exports = {
          })
         },
       getUserCollaborations(req, callback){
-          console.log(req);
+       //   console.log(req);
         Collaborator.findAll({
             where: {
               userId: req.user.id,
@@ -88,7 +89,7 @@ module.exports = {
           })
         },
         getCollaborators(id, callback){
-            console.log(id);
+            //console.log(id);
           return Wiki.findOne({
               where: {
                 id: id
