@@ -133,21 +133,19 @@ module.exports = {
           callback(err);
         })
       },
-      downgrade(id){
-        return Wiki.findById(id)
+      downgrade(user){
+        Wiki.findAll({
+            where: { userId: user}
+        })
         .then((wikis) => {
-          wikis.forEach(wiki => {
-            wiki.update({
-              private: false
-            });
-          });
+            wikis.forEach((wiki) => {
+                wiki.update({
+                    private: false
+                })
+            })
         })
-        .catch(err => {
-          console.log(err);
-        })
-    }
+   }
+
 }
-
-
 
 
