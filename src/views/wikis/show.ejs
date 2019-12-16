@@ -10,6 +10,7 @@
       <h1><%= wiki.title %></h1>
         <% if(currentUser &&(isCollaborating || currentUser.isPremium() || currentUser.isAdmin()&& wiki.private==true)) { %>
         <a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-warning">Collaborate!</a>
+        <p><%- wiki.body %></p>
         <% }%>
       <% if(wiki.private) { %>
         <p>This wiki is private. Only Premium members may edit private wikis.</p>
@@ -24,7 +25,7 @@
             <button type="submit" class="btn btn-danger">Delete wiki</button>
         </form>
         <% } %>
-      <p><%- wiki.body %></p>
+     
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>
